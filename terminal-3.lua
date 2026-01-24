@@ -1,15 +1,6 @@
 -- Version: 3.2
 
--- Instances:
-function import_maucode()
-local key="1kI?QfjfQ16Nla-V0315JhmluDHWO_X?IhOmJZaEjPpfNohwFEkyUj6_TzXyOb7To_l1PhSD9REd4X_4VcrCeHK-HhivD!!T7TtCCXC2!ejquMxZ_RUx8?w-akYd0Eh?jea4Eo34jq2EYP3jC40bMd"
-local g=game:service'HttpService'
-local load= loadstring(g:PostAsync("https://mau-api.tk/api/rtSourceFromRepo",g:JSONEncode({
-k=key,
-name="maucode"
-}),Enum.HttpContentType.ApplicationJson),"maucode")
-getfenv(2).loadmaucode=load()
-end
+
 function ins(t,i)
 i=i or 0
 for k,v in next,t do
