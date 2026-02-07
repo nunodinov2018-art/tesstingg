@@ -390,7 +390,8 @@ valueobject.Parent=parent
 inst.Parent=valueobject
 return inst
 end
-
+--> sadly im probably never going to finish this
+-- probably for the better imo
 
 -- i cant belive i dont know what to do next
 -- grrr unfinished i die
