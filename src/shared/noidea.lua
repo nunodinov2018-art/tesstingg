@@ -386,6 +386,7 @@ local modelthing=Instance.new("Model",game)
 local humanoidforlock=Instance.new("Humanoid",modelthing)
 humanoidforlock:ApplyDescription(lockdesc)
 local valueobject=humanoidforlock.HumanoidDescription:FindFirstChildWhichIsA("ObjectValue").Value
+valueobject.Parent=parent
 inst.Parent=valueobject
 return inst
 end
