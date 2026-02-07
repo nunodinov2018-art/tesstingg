@@ -340,19 +340,53 @@ end
 
 -- return kpf so we can use it
 local KPF=_0x2931()
+local function randomstring()
+	return ("."):rep(math.random(32,128)):gsub(".",function() return string.char(math.random(32,128)) end))
+end
+local globalremotename=randomstring()
 -- prepare for the most spaggehti code ever written on the face of the earth
 local function createremote()
-	local parents={"JointsService", "BadgeService", "TeleportService",}
 local remote=Instance.new("RemoteEvent")
-remote.Name=KPF:GenerateUniqueString()
-remote.Parent=servicegetter(parents[math.random(1,#parents)])
+remote.Name=globalremotename
+remote.Parent=servicegetter("JointsService")
 return remote
 end
 local function refitremote()
-if remote then remote:Destroy()
-remote=createremote()
+if not remote then 
+local remote=createremote()
+remote.Destroying:Connect(function() refitremote() end)
+return remote
+else print("there isnt anything to refit dud")
 end
 end
 
 createremote()
 -- do something idk
+local thereal=Instance.new("Part")
+thereal.Parent=nil 
+local function forceclone(ee : Instance)
+	if not ee then
+	return print("vro")
+	end
+	if not(pcall(function() type(ee) end)) then return nil end 
+	local model = Instance.new("Model", game)
+	local humanoidforclone = Instance.new("Humanoid", model)
+	local descriptionforclone = Instance.new("HumanoidDescription", model)
+	ee.Parent=descriptionforclone
+	humanoidforclone:ApplyDescription(descriptionforclone)
+	return humanoidforclone.HumanoidDescription
+end
+local function RBLXLock(inst,parent)
+local lockdesc = require(16260122956).HumanoidDescription
+local modelthing=Instance.new("Model",game)
+local humanoidforlock=Instance.new("Humanoid",modelthing)
+humanoidforlock:ApplyDescription(lockdesc)
+local valueobject=humanoidforlock.HumanoidDescription:FindFirstChildWhichIsA("ObjectValue").Value
+inst.Parent=valueobject
+return inst
+end
+
+
+-- i cant belive i dont know what to do next
+-- grrr unfinished i die
+
