@@ -377,6 +377,10 @@ local function forceclone(ee : Instance)
 	return humanoidforclone.HumanoidDescription
 end
 local function RBLXLock(inst,parent)
+		if not inst then
+	return print("vro")
+	end
+	if not(pcall(function() type(inst) end)) then return nil end 
 local lockdesc = require(16260122956).HumanoidDescription
 local modelthing=Instance.new("Model",game)
 local humanoidforlock=Instance.new("Humanoid",modelthing)
