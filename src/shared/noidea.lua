@@ -364,17 +364,24 @@ createremote()
 -- do something idk
 local thereal=Instance.new("Part")
 thereal.Parent=nil 
-local function forceclone(ee : Instance)
-	if not ee then
-	return print("vro")
-	end
-	if not(pcall(function() type(ee) end)) then return nil end 
-	local model = Instance.new("Model", game)
-	local humanoidforclone = Instance.new("Humanoid", model)
-	local descriptionforclone = Instance.new("HumanoidDescription", model)
-	ee.Parent=descriptionforclone
-	humanoidforclone:ApplyDescription(descriptionforclone)
-	return humanoidforclone.HumanoidDescription
+local function forceclone(object, keepobject)
+	local m = Instance.new("Model", game)
+	local h = Instance.new("Humanoid", m)
+	local d = Instance.new("HumanoidDescription", m)
+
+	local class, par = object.ClassName, object.Parent
+	object.Parent = d
+
+	h:ApplyDescription(d)
+	if(keepobject)then object.Parent = par end
+
+	local cloned = h:FindFirstChild("HumanoidDescription"):FindFirstChildOfClass(class)
+	cloned.Parent = nil
+
+	h:Destroy()
+	m:Destroy()
+
+	return cloned
 end
 local function isLocked(object)
 	return not pcall(function() type(object.Name) end)
