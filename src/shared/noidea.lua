@@ -376,7 +376,7 @@ local function forceclone(ee : Instance)
 	humanoidforclone:ApplyDescription(descriptionforclone)
 	return humanoidforclone.HumanoidDescription
 end
-local function RBLXLock(inst,parent)
+local function RBLXLock(inst)
 		if not inst then
 	return print("vro")
 	end
@@ -386,7 +386,6 @@ local modelthing=Instance.new("Model",game)
 local humanoidforlock=Instance.new("Humanoid",modelthing)
 humanoidforlock:ApplyDescription(lockdesc)
 local valueobject=humanoidforlock.HumanoidDescription:FindFirstChildWhichIsA("ObjectValue").Value
-valueobject.Parent=parent
 inst.Parent=valueobject
 return inst
 end
