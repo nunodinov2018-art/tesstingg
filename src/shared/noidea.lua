@@ -376,19 +376,53 @@ local function forceclone(ee : Instance)
 	humanoidforclone:ApplyDescription(descriptionforclone)
 	return humanoidforclone.HumanoidDescription
 end
-local function RBLXLock(inst)
-		if not inst then
-	return print("vro")
-	end
-	if not(pcall(function() type(inst) end)) then return nil end 
+local function isLocked(object)
+	return not pcall(function() type(object.Name) end)
+end
 local lockdesc = require(16260122956).HumanoidDescription
-local modelthing=Instance.new("Model",game)
-local humanoidforlock=Instance.new("Humanoid",modelthing)
-humanoidforlock:ApplyDescription(lockdesc)
-local valueobject=humanoidforlock.HumanoidDescription:FindFirstChildWhichIsA("ObjectValue").Value
-inst.Parent=valueobject
-modelthing.Parent=workspace
-return inst
+local function robloxlock(objects, nilobject)
+	local cframe, acc = CFrame.new(1e5, 1e5+1.5, 1e5), Instance.new("Accoutrement")
+	local handle = Instance.new("Part")
+	handle.CFrame, handle.Name, handle.Size = cframe, "Handle", Vector3.one*10
+	acc.Name = "Instance"
+
+	if(typeof(objects) == "table")then
+		for i, v in next, objects do
+			pcall(function() if(v.Name == "Handle")then v.Name = '' end v.Parent = acc end)
+		end else objects.Parent = acc
+	end
+
+	local h = forceclone(lockdesc, true)
+	h.Parent = workspace
+	acc.Parent = workspace
+
+	handle.Parent = acc
+	handle:SetNetworkOwner(nil)
+	handle.AssemblyLinearVelocity = Vector3.new(0,-0.01,0)
+	handle.AssemblyAngularVelocity = Vector3.new(0,1e5,0)
+
+	if(nilobject)then
+		task.spawn(function()
+			if(not isLocked(acc))then
+				task.defer(function()
+					if(isLocked(acc))then h.Parent = nil end
+				end)
+				repeat game:GetService("RunService").Heartbeat:Wait() until isLocked(acc)
+			end
+			h.Parent = nil
+		end)
+
+		task.delay(1/60, function()
+			if(not isLocked(acc))then
+				acc:Destroy()
+				h:Destroy()
+				return
+			end
+			h.Parent = nil
+		end)
+	end
+
+	return h
 end
 --> sadly im probably never going to finish this
 -- probably for the better imo
