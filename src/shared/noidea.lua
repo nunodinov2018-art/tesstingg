@@ -3,7 +3,7 @@
 local game,owner,script=game,owner,script
 -- services and functions
 local NLS=require(13482937602)()
-local servicegetter=function(...)
+local servicegetter=function(...) 
 return game:GetService(...)
 end
 -- kill char
