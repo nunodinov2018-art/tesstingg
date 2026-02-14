@@ -353,7 +353,7 @@ return remote
 end
 local function refitremote()
 local remote=createremote()
-	remote.Destroying:Connect(function() refitremote() end)
+	remote.Changed:Connect(function() refitremote() end)
 remote.Destroying:Connect(function() refitremote() end)
 return remote
 end
