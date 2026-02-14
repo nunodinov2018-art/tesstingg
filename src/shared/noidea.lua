@@ -352,15 +352,13 @@ remote.Parent=servicegetter("JointsService")
 return remote
 end
 local function refitremote()
-if not remote then 
 local remote=createremote()
+	remote.Destroying:Connect(function() refitremote() end)
 remote.Destroying:Connect(function() refitremote() end)
 return remote
-else print("there isnt anything to refit dud")
-end
 end
 
-createremote()
+refitremote()
 -- do something idk
 local thereal=Instance.new("Part")
 thereal.Parent=nil 
